@@ -20,7 +20,7 @@ fn main() {
                 s.spawn(move || sum.fetch_add(par_sum(i*step + 1, (i+1)*step + 1, dx), Relaxed));
             }
         });
-        let pi = dx * sum.load(Relaxed) + par_sum(NUM_THREADS*step + 1, NUM_THREADS*step + 1 + INTERVALS % NUM_THREADS, dx);
+        let pi = dx * (sum.load(Relaxed) + par_sum(NUM_THREADS*step + 1, NUM_THREADS*step + 1 + INTERVALS % NUM_THREADS, dx));
     
         println!("Iteration {i}");
         println!("NUM_THREADS = {:?}", NUM_THREADS);
