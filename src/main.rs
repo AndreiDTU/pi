@@ -3,7 +3,7 @@ use std::{sync::atomic::Ordering::Relaxed, thread, time::{Duration, Instant}};
 use atomic_float::AtomicF64;
 
 static INTERVALS: u32 = 10000000;
-static NUM_THREADS: u32 = 10;
+static NUM_THREADS: u32 = 7;
 static PI25DT: f64 = 3.141592653589793238462643;
 
 fn main() {
@@ -20,7 +20,7 @@ fn main() {
                 s.spawn(move || sum.fetch_add(par_sum(i*step + 1, (i+1)*step + 1, dx), Relaxed));
             }
         });
-        let pi = dx * sum.load(Relaxed) + par_sum(NUM_THREADS*step + 1, INTERVALS % NUM_THREADS, dx);
+        let pi = dx * sum.load(Relaxed) + par_sum(NUM_THREADS*step + 1, NUM_THREADS*step + 1 + INTERVALS % NUM_THREADS, dx);
     
         println!("Iteration {i}");
         println!("NUM_THREADS = {:?}", NUM_THREADS);
