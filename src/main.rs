@@ -2,7 +2,7 @@ use std::{sync::atomic::Ordering::Relaxed, thread, time::{Duration, Instant}};
 
 use atomic_float::AtomicF64;
 
-static INTERVALS: u32 = 10000000;
+static INTERVALS: u32 = 10_000_000;
 static NUM_THREADS: u32 = 7;
 static PI25DT: f64 = 3.141592653589793238462643;
 static DX: f64 = 1.0 / INTERVALS as f64;
